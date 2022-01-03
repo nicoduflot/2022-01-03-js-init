@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Formation Javascript Ecmascript Inititation</title>
+    <link rel="stylesheet" href="../css/bootstrap.css" />
+    <script src="../js/bootstrap.bundle.js"></script>
+    <link rel="stylesheet" href="../css/style.css" />
+    <script>
+        // avant es6 pour créer un taleau en JS
+        // var tableau = new Array('valeur', 1, 3.2, true);
+        // console.table(tableau);
+        // depuis es6
+        // let cars = [];
+        // console.log(typeof cars);
+        let cars = ['Peugeot', 'Citroën', 'Ford', 'Renault'];
+        console.table(cars);
+        console.table(cars.length);
+        console.log(cars[1]);
+        console.log(`le tableau cars contient ${cars.length} élément(s)`);
+        // les tableaux sont des objets itérables (qu'on peux parcourir)
+
+        let unNombre = 1;
+        let duTexte = 'test';
+        
+        console.log(typeof unNombre);
+        console.log(typeof duTexte);
+        console.log(typeof cars);
+
+        /*
+        les boucles servent à parcourir les tableaux ou a éxécuter une série
+        d'instruction semblables mais a faire en itération
+        */
+
+        // for
+        console.log('------------ for ---------------');
+        for (let i = 0; i < cars.length; i++){
+            console.log(`cars[${i}] : ${cars[i]}`);
+        }
+
+        // for in
+        console.log('------------ for in ---------------');
+        for (let index in cars){
+            console.log(`cars[${index}] : ${cars[index]}`);
+        }
+
+        // le for in permet aussi de parcourir les éléments d'un objet
+        // exemple sur un objet litéral
+        let obj = {
+            nom: 'Duflot',
+            prenom: 'Nicolas',
+            age: 41,
+            presentation: function (){
+                return `je m'appele ${this.prenom} `;
+            }
+        };
+
+        //console.log(obj.prenom);
+        //console.log(obj.presentation());
+
+        console.log('------------ for in object ---------------');
+        for (let key in obj){
+            console.log(`obj[${key}] : ${obj[key]}`);
+        }
+
+        // for of (es6)
+        console.log('------------ for of ---------------');
+        for (let value of cars){
+            console.log(`la valeur actuelle dans cars est ${value}`);
+        }
+
+        console.log('--------- while ---------');
+        let cpt = 0;
+        // on "n'entre dans le while" que si les conditions sont respectées
+        while (cpt < cars.length){
+            console.log(cars[cpt]);
+            cpt++;
+        }
+
+        let test = [];
+        console.log('--------- do while avec test = []; ---------');
+        cpt = 0;
+        // on "n'entre dans le while" que si les conditions sont respectées
+        do{
+            if(test.length === 0){
+                break;
+            }
+            console.log(test[cpt]);
+            cpt++;
+        }while (cpt < test.length)
+
+        console.log('--------- do while avec cars ---------');
+        cpt = 0;
+        // on "n'entre dans le while" que si les conditions sont respectées
+        do{
+            if(cars.length === 0){
+                break;
+            }
+            console.log(cars[cpt]);
+            cpt++;
+        }while (cpt < cars.length)
+
+        let tabNumber = [1, 2, 3];
+        // forEach
+        console.log('---------- forEach ------------');
+        tabNumber.forEach(function(value, index, tabUsed){
+            tabUsed[index] = value*10;
+            console.log(value, index, tabUsed);
+            console.log(tabUsed[index]);
+        });
+
+        console.table(tabNumber);
+
+        // es6 .entries()
+        /*
+        Vient du modèle objet : permet de parcourir et d'axtraire les 
+        clefs et les valeurs d'un tableau sous forme de tableau pour chaque élément
+        */
+        console.log('------------ .entries() ---------------');
+        for (let entry of cars.entries()){
+            console.log(entry);
+            console.log(entry[0]);
+            console.log(entry[1]);
+        }
+
+        // ajouter un élément dans le tableau
+        cars[cars.length] = 'Hyundai';
+        console.table(cars);
+        //cars[8] = 'Papamobile';
+        console.table(cars);
+        // .push() // jamais dangereux, toujours à l'indice libre suivant
+        cars.push('Seat');
+        cars.push('Fiat', 'Toyota');
+        console.table(cars);
+
+        // supprimer des éléments du tableau
+        // .pop(), .shift(), .splice()
+
+        //.pop() => extrait le dernier élément du tableau
+        let extractLast = cars.pop();
+        console.table(cars);
+        console.log(extractLast);
+
+        //.shift() => extrait le premier élément du tableau
+        let extractFirst = cars.shift();
+        console.table(cars);
+        console.log(extractFirst);
+
+        // splice, permet plus que de simplement extraire des valeurs
+        // .plice() 1 : extraire des valeurs du tableau (retourne un tableau )
+        let removed = cars.splice(cars.indexOf('Ford'), 2);
+        console.table(cars);
+        console.table(removed);
+
+        // .splice() 2 : extraire des valeurs et les remplacer par d'autres valeurs
+        let replaced = cars.splice(cars.indexOf('Citroën'), 2, 'Alpine', 'Mazda', 'Tesla');
+        console.table(cars);
+        console.table(replaced);
+
+        // .splice() 3 : inserrer des valeurs dans un tableau
+        cars.splice(cars.indexOf('Mazda'), 0, removed[0], removed[1], replaced[0], replaced[1], extractFirst, extractLast);
+        console.table(cars);
+
+        // faire la copie d'un tableau
+        /*
+        let carsClone = cars; // crée un alias ou un référence à l'objet cars
+        console.table(carsClone);
+        carsClone.pop(); // si on change carsClone, cars est changé aussi car en réalité
+        console.table(carsClone);
+        console.table(cars); // cars est carsClone et inversement
+        */
+
+        // pour créer une copie distincte d'un tableau, on va utilser .slice()
+        //carsClone = cars.slice(cars.indexOf('Hyundai'), cars.indexOf('Tesla'));
+        carsClone = cars.slice();
+        carsClone.pop();
+        console.log('carsClone', carsClone);
+        console.log('cars', cars);
+
+        // trier en ordre croissant des valeurs
+        carsClone.sort();
+        console.table(carsClone);
+
+        // trier en ordre décroissant des valeurs
+        carsClone.reverse();
+        console.table(carsClone);
+
+        // quid des tableaux à plusieurs dimension ?
+
+        let carsTest = [ ['Fiat', 1956, '500'], ['Kyia', 1995, 'Motors'], ['Kyia', 1990], ['Ford', 1950], ['Ford', ,'Mustang'] ];
+        console.table(carsTest);
+        carsTest.sort();
+        console.table(carsTest);
+        carsTest.reverse();
+        console.table(carsTest);
+
+        // les tableaux à deux dimension (ou plus) n'existe pas vraiùent en JS
+        let tab2D = [ ['a', 'b', 'c'], [12, 13, 14, 15], [10, 23, 56, 4] ];
+        console.table(tab2D);
+        console.log('---------- parcourir tab2d ---------');
+        for (let i = 0; i < tab2D.length; i++){
+            for (let j = 0; j < tab2D[i].length; j++){
+                console.log(tab2D[i][j]);
+            }    
+        }
+
+        console.log('---------- parcourir tab2d avec for of ---------');
+        for (let value of tab2D){
+            for (let subValue of value){
+                console.log(subValue);
+            }    
+        }
+
+        // recherche d'éléments
+
+        // .find() retrouver la première occurence d'une condition
+        let arrayNum = [5, 8, 12, 29, 3, 44];
+        console.log(('------------- .find() ----------'));
+        let found = arrayNum.find(function(element){
+            console.log(element);
+            return element > 20;
+        });
+
+        console.log(`l'élément supérieur à 20 trouvé est : ${found} `);
+
+        let found2 = null;
+        arrayNum.forEach(function(element){
+            console.log(element);
+            if(element > 40){
+                found2 = element;
+            }
+        });
+
+        console.log(`l'élément supérieur à 40 trouvé est : ${found2} `);
+
+        // .filter() récupérer toutes les occurences d'une condition
+        let filtered = arrayNum.filter(function(element){
+            return element > 8;
+        });
+
+        console.log(`les éléments supérieur à 8 trouvés sont : ${filtered} `);
+
+        let filtered2 = [];
+        arrayNum.forEach( function(element){
+            if(element > 5){
+                filtered2.push(element);
+            }
+        } );
+
+        console.log(`les éléments supérieur à 5 trouvés sont : ${filtered2} `);
+    </script>
+</head>
+
+<body>
+    <header class="bg-light text-center">
+        <h1>Formation Javascript Ecmascript</h1>
+    </header>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="https://github.com/nicoduflot/2022-01-03-js-init" target="_blank">GitHub</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+                aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="../">Accueil</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            Introduction
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <li><a class="dropdown-item" href="../intro/index.html">Introduction</a></li>
+                            <li><a class="dropdown-item" href="../intro/tableau.html">Tableaux</a></li>
+                            <li><a class="dropdown-item" href="../intro/fonction.html">Fonctions</a></li>
+                            <li>
+                                <a class="dropdown-item" href="../intro/destructuration.html">
+                                    La destructuration
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <main class="container">
+        <section class="row">
+            <article class="offset-lg-3 col-lg-6">
+                <header>
+                    <h2>Les tableaux</h2>
+                </header>
+                <main>
+                    <p>
+                        Tout est dans la console
+                    </p>
+                </main>
+                <footer class="text-center">
+                    <a href="../">
+                        <button class="btn btn-outline-dark">
+                            Aller l'accueil
+                        </button>
+                    </a>
+                </footer>
+            </article>
+        </section>
+    </main>
+    <footer class="bg-light text-center">
+        &copy; Dawan JAN - 2022
+    </footer>
+</body>
+
+</html>
