@@ -13,10 +13,21 @@
         /*
         Commentaire en bloc
         */
-
         // déclarer une variable
         var prenom = 'Jean';
         let nom = 'Durand';
+
+        let machin;
+        console.log(typeof machin);
+
+        machin = null;
+        console.log(typeof machin);
+
+        machin = 'null';
+        console.log(typeof machin);
+
+        machin = 12.3;
+        console.log(typeof machin);
 
         function affichePrenomNom(){
             console.log(prenom);
@@ -27,9 +38,140 @@
         }
 
         affichePrenomNom();
-
         console.log(prenom);
         console.log(nom);
+        /*
+        transtypage => quand il y a concaténation de variables, 
+        si une des variables est une chaîne de caractères, les variables 
+        concaténée le devienne automatiquement.
+        */
+
+        console.log(1+2);
+        console.log( nom + ( 1 + 2.3) );
+        console.log(`mon nom est ${nom} \n\tma moyenne ${2.3+3}`);
+
+        /*
+        JS est un langage protoypé => un langage objet
+        */
+
+        const PAYSDEV = 'France';
+
+        // JS est un langage non typé mais il manipule les type de données suivants
+
+        /**
+         * Types [primitif]
+         * number               => (entier, flottant)
+         * bool                 => Booléen (true, false)
+         * 
+         * [référence]
+         * String               => chaîne de caractère
+         * Array                => tableau de données
+         * Object               => objet
+         * JSON                 => Javascript Object Notation
+        */
+
+        // Opérateurs
+        /**
+         * 
+         * Mathématiques
+         * +        => addition (ATTENTION : sert à la concaténation des string )
+         * -        => soustraction
+         * /        => Division
+         * %        => modulo, le reste d'une division
+         * *        => multiplication
+         * **       => puissance ( Remplace Math.pow() )
+         *              Math.pow(2,3);  // renvoie 8
+         *              2**3            // renvoie 8
+         * 
+         * Incrémentation / décrémentation
+         * let i = 0;
+         * console.log(i++);     // affiche 0 et ajoute ensuite 1 à la valeur de i = 1
+         * console.log(++i);     // ajoute 1 à la valeur de i puis affiche i = 2 
+         * 
+         * même comportement pour i-- et --i 
+         * 
+         * Logiques
+         * 
+         * &&   (AND ou ET)
+         *      si a est vrai et b est vrai alors a && b est vrai
+         *      si a est vrai et b est faux alors a && b est faux
+         *      si a est faux et b est vrai alors a && b est faux
+         *      si a est faux et b est faux alors a && b est faux
+         * 
+         * ||   (OR ou OU)
+         *      si a est vrai ou b est vrai alors a || b est vrai
+         *      si a est vrai ou b est faux alors a || b est vrai
+         *      si a est faux ou b est vrai alors a || b est vrai
+         *      si a est faux ou b est faux alors a || b est faux
+         * 
+         * !    (NOT ou NON)
+         *      si a est vrai, !a est faux
+         *      si a est faux, !a est vrai
+         * 
+         * ^    (XOR ou OU EXVLUSIF BINAIRE ou NON OU)
+         *      si a est vrai ou b est vrai alors a ^ b est faux
+         *      si a est vrai ou b est faux alors a ^ b est vrai
+         *      si a est faux ou b est vrai alors a ^ b est vrai
+         *      si a est faux ou b est faux alors a ^ b est faux
+         *
+         * Comparaison
+         * a < b    (a inférieur à b)
+         * a > b    (a supérieur à b)
+         * a <= b   (a inférieur ou égal à b)
+         * a >= b   (a supérieur ou égal à b)
+         * 
+         * ==       => comparatif de valeur             '2' == 2; vrai
+         * ===      => comparatif de valeur et de type  '2' === 2; faux
+         *                                              2 === 2; vrai
+         * 
+         * !=       => comparatif de valeur             '2' != 2; faux
+         * !==      => comparatif de valeur et de type  '2' !== 2; vrai
+         *                                              2 !== 2; faux
+        */
+
+        let chaineQuote = 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.\n'; 
+        chaineQuote = chaineQuote + 'Nam velit incidunt porro accusamus voluptatum maiores cupiditate possimus';
+        chaineQuote += 'tempore asperiores. Veniam reiciendis quia optio! Velit porro quisquam '
+        chaineQuote += 'voluptas necessitatibus ea nostrum.';
+
+        console.log(chaineQuote);
+
+        let chaineBackQuote = `Lorem ipsum dolor sit amet consectetur 
+adipisicing elit. Earum beatae delectus inventore corrupti
+        unde illum possimus, neque consequuntur nesciunt quam veritatis 
+nulla, culpa accusamus iste dolor cum aliquam. Repellendus, laudantium!`;
+
+        console.log(chaineBackQuote);
+
+        // Interpolation de chaîne
+        function renvoiUnMot(unMot = 'Coucou'){
+            return unMot;
+        }
+
+        console.log(renvoiUnMot());
+        console.log(renvoiUnMot('Maïté ne souffre pas'));
+
+        let a = 1;
+        let template = `a : ${a}, 1 + 2 : ${1 + 2}, \nrenvoiUnMot() : ${renvoiUnMot()}, 
+renvoiUnMot('Cadfael') : ${renvoiUnMot('Cadfael')}  `;
+        console.log(template);
+
+        function test(){
+            let a = 'test';
+            console.log(a);
+            a = 'titi';
+            console.log(a);
+        }
+
+        test();
+        console.log(a);
+
+        let i = 12;
+        for(let i = 0; i < 3; i++){
+            console.log(i);
+        }
+        console.log(i);
+
     </script>
 </head>
 
