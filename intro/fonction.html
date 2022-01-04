@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Formation Javascript Ecmascript Inititation</title>
+    <link rel="stylesheet" href="../css/bootstrap.css" />
+    <script src="../js/bootstrap.bundle.js"></script>
+    <link rel="stylesheet" href="../css/style.css" />
+    <script>
+        // les fonctions sans paramètres
+        function maPremiereFonction(){
+            return 'Hello World';
+        }
+
+        console.log(maPremiereFonction());
+
+        // les fonctions avec paramètres
+        function ouiMaitre(commande = 'La fermer'){
+            /*
+            if(!commande){
+                commande = 'La fermer';
+            }
+            */
+            return `Oui maître je vais ${commande} `;
+        }
+
+        console.log(ouiMaitre());
+        console.log(ouiMaitre(' aller chercher de quoi faire le monstre'));
+
+        // paramètre : l'opérateur variadique ou Rest parameter => ...variable
+        /*
+        l'opérateur variadique transforme une suite de variable 
+        (de 1 à x variable) en un tableau dans le traitement de la fonction.
+        ATTENTION : ce paramètre doit être exclusivement déclaré en dernier,
+        et il ne peut être déclaré qu'une seule fois
+        */
+
+        function addition(...values){
+            let result = 0;
+            for( let value of values){
+                if( !isNaN(value) ){
+                    result += parseFloat(value);
+                }
+            }
+            return result;
+        }
+
+        console.log(addition(1, 2.2,'3.3',4,5, 'text',6,7,8,9));
+
+        let maFonctionAnonyme = function(name = null){
+            /*
+            let result = 'Hello ';
+            if(name === null){
+                result += 'Kitty';
+            }else{
+                result += name;
+            }
+            return result;
+            */
+            // on va renvoyer le resultat d'un ternaire
+            // le ternaire remplace un if simple
+            // (condition)? <résultat si la condition retourne vrai> : <résultat si la condition retourne vrai>;
+            // équivalent au SI dans Excel
+            // let result = 'Hello' + (name === null)? 'Kitty': name;
+            return `Hello ${(name === null)? 'Kitty': name} `;
+        };
+
+        console.log(maFonctionAnonyme('Nicolas'));
+        console.log(maFonctionAnonyme());
+        
+        // avec l'opérateur arrow
+        let maFonctionAnonyme2 = (name = null) => `Hello ${(name === null)? 'Kitty': name} `;
+
+        console.log(maFonctionAnonyme2('Nicolas'));
+        console.log(maFonctionAnonyme2());
+
+        // fonction auto-éxécuté
+        (function(){
+            console.table([1, 2, 3, 4]);
+        })();
+
+        (function(table, bibi){
+            console.table(table);
+            console.log(bibi);
+        })( [1, 2, 3, 4], 'test' );
+
+        ( (table, bibi) => {
+            console.table(table);
+            console.log(bibi);
+        })([1, 2, 3, 4], 'test');
+
+    </script>
+</head>
+
+<body>
+    <header class="bg-light text-center">
+        <h1>Formation Javascript Ecmascript</h1>
+    </header>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="https://github.com/nicoduflot/2022-01-03-js-init" target="_blank">GitHub</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+                aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="../">Accueil</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            Introduction
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <li><a class="dropdown-item" href="../intro/index.html">Introduction</a></li>
+                            <li><a class="dropdown-item" href="../intro/tableau.html">Tableaux</a></li>
+                            <li><a class="dropdown-item" href="../intro/fonction.html">Fonctions</a></li>
+                            <li>
+                                <a class="dropdown-item" href="../intro/destructuration.html">
+                                    La destructuration
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <main class="container">
+        <section class="row">
+            <article class="offset-lg-3 col-lg-6">
+                <header>
+                    <h2>Les fonctions</h2>
+                </header>
+                <main>
+                    <p>
+                        Tout est dans la console
+                    </p>
+                </main>
+                <footer class="text-center">
+                    <a href="../">
+                        <button class="btn btn-outline-dark">
+                            Aller l'accueil
+                        </button>
+                    </a>
+                </footer>
+            </article>
+        </section>
+    </main>
+    <footer class="bg-light text-center">
+        &copy; Dawan JAN - 2022
+    </footer>
+</body>
+
+</html>
