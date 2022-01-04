@@ -9,7 +9,125 @@
     <script src="../js/bootstrap.bundle.js"></script>
     <link rel="stylesheet" href="../css/style.css" />
     <script>
+        // destructuration
+        let liste = [1,2,3,4];
+        // assigner chacun des éléments de la liste aux variables suivantes : a, b et c
+        /*
+        let a = liste[0];
+        let b = liste[1];
+        let c = liste[2];
+        */
+
+        let [a, b, c] = liste;
+        console.log( `a = ${a}, b = ${b}, c = ${c} `);
+
+        let [d, , e, f] = liste;
+        console.log( `d = ${d}, e = ${e}, f = ${f} `);
+        //[1,2,3,4]
+        let [h, i, j, k = 0, l = 5] = liste;
+        console.log( `h = ${h}, i = ${i}, j = ${j}, k = ${k}, l = ${l} `);
+
+        // attention, maivais code :
+        function unTruc(unTruc, uneOption, ...valeurs){
+            //pas préconisé dans ce cas mais possible
+            let [a = 0, b = false, c = 'compta'] = valeurs;
+        }
+
+        /*
+        //equivalent à
+        function unTruc(unTruc, uneOption, a = 0, b = false, c = 'compta'){
+            //déclaration préconisé pour ce type de fonction
+            
+        }
+        */
+
+        // destructuration peut aussi s'appliquer sur les objets
+
+        let agentSecret = {
+            lastName: 'Bond',
+            firstName: 'James',
+            job: 'Agent Secret',
+            helloBond: function(value, test = null){
+                return `Hello ${value} `;
+            }
+        };
+
+        console.log(agentSecret);
+        console.log(agentSecret.lastName);
+        console.log(agentSecret.firstName);
+        console.log(agentSecret.job);
+        console.log(agentSecret.helloBond('Peppa Pig'));
+        console.log(typeof agentSecret);
+
+        let {
+            lastName,
+            firstName,
+            job,
+            helloBond
+        } = agentSecret;
+
+        console.log(lastName);
+        console.log(firstName);
+        console.log(job);
+        console.log(helloBond('Moneypenny'));
+        console.log(typeof helloBond);
+
+        let {
+            lastName: nom,
+            firstName: prenom,
+            job: boulot,
+            pseudo = '007',
+            helloBond: salutation
+        } = agentSecret;
+
+        console.log(nom);
+        console.log(salutation('Voyageur !'));
+
+        // échange de valeur
+        let [number1, number2] = [10, 72];
+        /*
+        //équivalent à
+        let number1 = 10
+        let number2 = 72;
+        */
+        console.log(`avant l'échange, number1 = ${number1}, number2 = ${number2} `);
+        /*
+        let tampon = number1;
+        number1 = number2;
+        number2 = tampon;
+        */
+        [number1, number2] = [number2, number1];
+
+        console.log(`après l'échange, number1 = ${number1}, number2 = ${number2} `);
+
+        let personnage1 = {
+            nomHeros: 'Le Canard',
+            prenom: 'Herbert',
+            multi: function(){
+                return 'Boule de feu';
+            }
+        };
+
+        let personnage2 = {
+            nomHeros: 'Le rouge',
+            prenom: 'Marvin',
+            multi: function(){
+                return 'Rage !';
+            }
+        };
+
+        console.log( `perso1 ${personnage1.prenom} ${personnage1.nomHeros} 
+${personnage1.multi}
+perso2 ${personnage2.prenom} ${personnage2.nomHeros} 
+${personnage2.multi}` );
+
+        [personnage1.multi, personnage2.multi] = [personnage2.multi, personnage1.multi];
         
+        console.log( `perso1 ${personnage1.prenom} ${personnage1.nomHeros} 
+${personnage1.multi}
+perso2 ${personnage2.prenom} ${personnage2.nomHeros} 
+${personnage2.multi}` );
+
     </script>
 </head>
 
