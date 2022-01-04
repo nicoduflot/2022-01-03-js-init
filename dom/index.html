@@ -8,89 +8,39 @@
     <link rel="stylesheet" href="../css/bootstrap.css" />
     <script src="../js/bootstrap.bundle.js"></script>
     <link rel="stylesheet" href="../css/style.css" />
+    <script src="../js/script.js"></script>
     <script>
-        // les fonctions sans paramètres
-        function maPremiereFonction(){
-            return 'Hello World';
-        }
+        loaded(function(){
 
-        console.log(maPremiereFonction());
+            let message = s('#message');
+            s('a#retourAccueil').addEventListener('click', function(event){
+                console.log(event.target);
 
-        // les fonctions avec paramètres
-        function ouiMaitre(commande = 'La fermer'){
-            /*
-            if(!commande){
-                commande = 'La fermer';
-            }
-            */
-            return `Oui maître je vais ${commande} `;
-        }
+                event.preventDefault();
+                message.innerHTML = '<b>Vous ne pouvez pas cliquer sur ce lien</b>'
+            });
 
-        console.log(ouiMaitre());
-        console.log(ouiMaitre(' aller chercher de quoi faire le monstre'));
+            let listeItem = sAll('ul#liste li a');
+            
+            listeItem.forEach(function(item){
+                item.addEventListener('click', function(event){
+                    event.preventDefault();
+                    console.log(this);
+                    console.log(this.dataset.url);
+                });
+            });
 
-        // paramètre : l'opérateur variadique ou Rest parameter => ...variable
-        /*
-        l'opérateur variadique transforme une suite de variable 
-        (de 1 à x variable) en un tableau dans le traitement de la fonction.
-        ATTENTION : ce paramètre doit être exclusivement déclaré en dernier,
-        et il ne peut être déclaré qu'une seule fois
-        */
-
-        function addition(...values){
-            let result = 0;
-            for( let value of values){
-                if( !isNaN(value) ){
-                    result += parseFloat(value);
-                }
-            }
-            return result;
-        }
-
-        console.log(addition(1, 2.2,'3.3',4,5, 'text',6,7,8,9));
-
-        let maFonctionAnonyme = function(name = null){
-            /*
-            let result = 'Hello ';
-            if(name === null){
-                result += 'Kitty';
-            }else{
-                result += name;
-            }
-            return result;
-            */
-            // on va renvoyer le resultat d'un ternaire
-            // le ternaire remplace un if simple
-            // (condition)? <résultat si la condition retourne vrai> : <résultat si la condition retourne vrai>;
-            // équivalent au SI dans Excel
-            // let result = 'Hello' + (name === null)? 'Kitty': name;
-            return `Hello ${(name === null)? 'Kitty': name} `;
-        };
-
-        console.log(maFonctionAnonyme('Nicolas'));
-        console.log(maFonctionAnonyme());
-        
-        // avec l'opérateur arrow
-        let maFonctionAnonyme2 = (name = null) => `Hello ${(name === null)? 'Kitty': name} `;
-
-        console.log(maFonctionAnonyme2('Nicolas'));
-        console.log(maFonctionAnonyme2());
-
-        // fonction auto-éxécuté
-        (function(){
-            console.table([1, 2, 3, 4]);
-        })();
-
-        (function(table, bibi){
-            console.table(table);
-            console.log(bibi);
-        })( [1, 2, 3, 4], 'test' );
-
-        ( (table, bibi) => {
-            console.table(table);
-            console.log(bibi);
-        })([1, 2, 3, 4], 'test');
-
+            let paragraphes = sAll('p:not(.showP)');    // on récupère une collection des tous 
+                                                        // les paragraphes sauf ceux possédant 
+                                                        // la classe showP
+            console.log(paragraphes);
+            let affichage = s('p.showP');
+            paragraphes.forEach(function(paragraphe){
+                paragraphe.addEventListener('mouseover', function(){
+                    affichage.innerHTML = this.innerHTML;
+                });
+            });
+        });
     </script>
 </head>
 
@@ -145,28 +95,57 @@
     </nav>
     <main class="container">
         <section class="row">
-            <article class="offset-lg-3 col-lg-6">
+            <article class="col-sm-12">
                 <header>
-                    <h2>Les fonctions</h2>
+                    <h2>le DOM : Document Object Model</h2>
                 </header>
                 <main>
                     <p>
-                        Tout est dans la console
+                        Le DOM nous permet de repérer, analyser, modifier et supprimer des éléments dans la page HTML.
+                    </p>
+                    <p>
+                        Il faut que tous les éléments soient chargés avant de pouvoir agir sur eux 
+                        avec le JS. On écoute alors l'évènement de la fenêtre (window) DOMContentLoaded qui survient 
+                        quand tous les éléments de la page ont été chargés.
+                    </p>
+                    <p>
+                        <span class="texte-rouge">Le lien suivant est surveillé</span> après le chargement de la page, si on clique dessus, il est "désactivé" 
+                        (sont comportement par défaut est annulé par le JS) et un message apparaît en dessous.
+                        <a href="../" id="retourAccueil">Lien</a><br />
+                        <span id="message"></span>
+                    </p>
+                    <ul id="liste">
+                        <li><a href="#" data-url="../resource/info01.txt">Item 1</a></li>
+                        <li><a href="#" data-url="https://jsonplaceholder.typicode.com/posts">Posts</a></li>
+                        <li><a href="#" data-url="../resource/info03.txt">Item 3</a></li>
+                        <li><a href="#" data-url="../resource/info04.txt">Item 4</a></li>
+                    </ul>
+                    <h3>Agir sur le DOM</h3>
+                    <p>
+                        Pour agir sur le DOM il faut :
+                    </p>
+                    <ul>
+                        <li>La page doit ête chargée</li>
+                        <li>Connaître le sélecteur de l'élément surveillé</li>
+                        <li>Abonner l'élément à un écouteur d'évènement</li>
+                    </ul>
+                    <p>
+                        L'écouteur d'évènement déclenchera l'action programmée quand l'évènement surveillé 
+                        sur un élément est déclenché.
+                    </p>
+                    <p class="showP">
+
                     </p>
                 </main>
-                <footer class="text-center">
-                    <a href="../">
-                        <button class="btn btn-outline-dark">
-                            Aller l'accueil
-                        </button>
-                    </a>
-                </footer>
             </article>
         </section>
     </main>
     <footer class="bg-light text-center">
         &copy; Dawan JAN - 2022
     </footer>
+    <script>
+        console.log('fin du chargement de la page');
+    </script>
 </body>
 
 </html>
