@@ -236,9 +236,14 @@
         console.log(`l'élément supérieur à 40 trouvé est : ${found2} `);
 
         // .filter() récupérer toutes les occurences d'une condition
-        let filtered = arrayNum.filter(function(element){
+        console.log(('------------- .filter() ----------'));
+        /*
+        let filtered = arrayNum.filter( function(element){
             return element > 8;
-        });
+        } );
+        */
+        let filtered = arrayNum.filter( element => element > 8 );
+        // opérateur arrow
 
         console.log(`les éléments supérieur à 8 trouvés sont : ${filtered} `);
 
@@ -250,6 +255,51 @@
         } );
 
         console.log(`les éléments supérieur à 5 trouvés sont : ${filtered2} `);
+
+        // ATTENTION, l'opérateur arrow va servir à gérer les conséquences
+        let object = {
+            numbers: [1, 2, 56, 4, 123],
+            pourChaque: function(){
+                for(let i = 0; i < this.numbers.length; i++){
+                    console.log(`dans le for, this : ${this}, this.numbers: ${this.numbers} `);
+                }
+                let _this = this;
+                this.numbers.forEach(function(value){
+                    console.log(`dans le for, this : ${this}, this.numbers: ${this.numbers} `);
+                    console.log(`dans le for, _this : ${_this}, _this.numbers: ${_this.numbers} `);
+                });
+            },
+            pourChaqueBis: function(){
+                this.numbers.forEach((value) => {
+                    console.log(`dans le for, this : ${this}, this.numbers: ${this.numbers} `);
+                });
+            }
+        };
+        console.log('-------- pourChaque() ----------------');
+        object.pourChaque();
+        console.log('-------- pourChaqueBis() ----------------');
+        object.pourChaqueBis();
+
+        // .map()
+        let numbers = [1, 2, 56, 4, 123];
+        let newNumbers = numbers.map(function(value, index, myArray){
+            console.log(value);
+            console.log(index);
+            console.log(myArray);
+            if(value < 4)
+            {
+                return value;
+            }else{
+                return value*10;
+            }
+            
+        });
+
+        console.table(numbers);
+        console.table(newNumbers);
+
+        
+
     </script>
 </head>
 
