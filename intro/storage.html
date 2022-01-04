@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="../css/bootstrap.css" />
     <script src="../js/bootstrap.bundle.js"></script>
     <link rel="stylesheet" href="../css/style.css" />
+    <script src="../js/script.js"></script>
     <script>
         console.log('début du chargement de la page');
         // pour pouvoir agir sur le DOM, on va guetter un évènement 
@@ -99,6 +100,73 @@
                 localStorage.clear();
                 console.log(localStorage);
                 dataLocal.innerHTML = 'Local supprimé';
+            });
+
+            // les cookies
+            /*
+            console.log(document.cookie);
+
+            // ajouter un cookie
+            let cookieValue = 'Nico';
+            // créer la date d'expiration
+            let dateNow = new Date();
+            //console.log(dateNow);
+            // créer la date d'expiration à partir de dateNow
+            dateNow.setTime( dateNow.getTime() + ( 1 * 24 * 60 * 60 * 1000 ) );
+            //console.log(dateNow);
+            // pour détruire prématurément un cookie, il suffit de 
+            // changer sa date d'expiration par une date antérieur
+            let anteDateNow = new Date();
+            anteDateNow.setTime( anteDateNow.getTime() + ( -1 * 24 * 60 * 60 * 1000 ) );
+            //console.log(anteDateNow);
+            // créer un cookie
+            //document.cookie = `monCookie=${cookieValue}; expires=${dateNow.toUTCString()}; SameSite=Strict; Secure`;
+            */
+
+            // on va créer dans une fichier de script js deux fonction : setCookie et getCookie pour gérer nos cookies
+
+            let cookieUser = document.querySelector('#cookieUser');
+            let btnCookie = document.querySelector('#btnCookie');
+            let dataCookie = document.querySelector('#dataCookie');
+            let btnCookieClearItem = document.querySelector('#btnCookieClearItem');
+            let btnClearCookie = document.querySelector('#btnClearCookie');
+            
+            
+            console.log(document.cookie);
+            
+            if(getCookie('cookieUserName')){
+                dataCookie.innerHTML = `<b>${getCookie('cookieUserName')}</b>`;
+            }else{
+                dataCookie.innerHTML = `<b>le cookie cookieUserName n'exsiste pas</b>`;
+            }
+
+            btnCookie.addEventListener('click', function(event){
+                /*
+                console.log(event);
+                console.log(event.target);
+                console.log(event.target.classList.toggle('btn'));
+                console.log(event.target.classList);
+                */
+
+                if(cookieUser.value !== ''){
+                    setCookie('cookieUserName', cookieUser.value, 1);
+                    dataCookie.innerHTML = `<b>${getCookie('cookieUserName')}</b>`;
+                    console.log(document.cookie); 
+                }
+            });
+
+            btnCookieClearItem.addEventListener('click', function(){
+                if(getCookie('cookieUserName')){
+                    setCookie('cookieUserName');
+                    dataCookie.innerHTML = `<b>CookieUserName Effacé</b>`;
+                    console.log(document.cookie); 
+                }
+            });
+
+            btnClearCookie.addEventListener('click', function(){
+                clearCookie();
+                dataCookie.innerHTML = `<b>Cookie(s) du domaine Effacé(s)</b>`;
+                console.log(document.cookie); 
             });
 
         });
@@ -235,6 +303,46 @@
                         </button>
                     </a>
                 </footer>
+            </article>
+        </section>
+        <section class="row">
+            <article class="offset-lg-3 col-lg-6">
+                <header>
+                    <h2>Le stockage des données</h2>
+                </header>
+                <main>
+                    <h3>Les cookies</h3>
+                    <p>
+                        Les cookies sont aussi enregistrés dans le navigateur dans l'attribut 
+                        document.cookie. C'est une chaîne de caractère formatée, elle contient 
+                        tous les cookies liés au domaine.
+                        Quand on crée un cookie, on y précise une date d'expiration.
+                        Quand la date est dépassée, le cookie est automatiquement 
+                        supprimé par le navigateur.
+                    </p>
+                    <p>
+                        <label class="form-label">UserName</label>
+                        <input type="text" class="form-control" id="cookieUser" value="" />
+                    </p>
+                    <p>
+                        <button id="btnCookie" class="btn btn-outline-primary">
+                            Sauvegarder UserName en cookie
+                        </button>
+                    </p>
+                    <p>
+                        <button id="btnCookieClearItem" class="btn btn-outline-primary">
+                            Supprimer UserName en cookie
+                        </button>
+                    </p>
+                    <p>
+                        <button id="btnClearCookie" class="btn btn-outline-primary">
+                            Supprimer les cookies
+                        </button>
+                    </p>
+                    <p>
+                        Cookie userName : <span id="dataCookie"></span>
+                    </p>
+                </main>
             </article>
         </section>
     </main>
