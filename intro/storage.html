@@ -23,6 +23,7 @@
             let dataSession = document.querySelector('#dataSession');
             let sessionUser = document.querySelector('#sessionUser');
             let btnSessionClearItem = document.querySelector('#btnSessionClearItem');
+            let btnClearSession = document.querySelector('#btnClearSession');
 
             console.log(sessionStorage);
 
@@ -44,13 +45,62 @@
                 //console.log('click');
                 sessionStorage.removeItem('sessionUserName');
                 console.log(sessionStorage);
-                dataSession.innerHTML = '';
+                dataSession.innerHTML = 'Item sessionUserName supprimé';
             });
             /*
             btnSession.addEventListener('dblclick', function(){
                 console.log('dblClick');
             });
             */
+
+            btnClearSession.addEventListener('click', function(){
+                sessionStorage.clear();
+                console.log(sessionStorage);
+                dataSession.innerHTML = 'Session supprimée';
+            });
+
+            // localStorage
+
+            let btnLocal = document.querySelector('button#btnLocal');
+            let dataLocal = document.querySelector('#dataLocal');
+            let localUser = document.querySelector('#localUser');
+            let btnLocalClearItem = document.querySelector('#btnLocalClearItem');
+            let btnClearLocal = document.querySelector('#btnClearLocal');
+
+            console.log(localStorage);
+
+            if(localStorage.getItem('localUserName')){
+                dataLocal.innerHTML = `<b> ${localStorage.getItem('localUserName')} </b>`;
+            }
+            
+            btnLocal.addEventListener('click', function(){
+                //console.log('click');
+                if(localUser.value !== ''){
+                    //console.log(`input contient ${localUser.value}`);
+                    localStorage.setItem('localUserName', localUser.value);
+                    console.log(localStorage);
+                    dataLocal.innerHTML = `<b> ${localStorage.getItem('localUserName')} </b>`;
+                }
+            });
+
+            btnLocalClearItem.addEventListener('click', function(){
+                //console.log('click');
+                localStorage.removeItem('localUserName');
+                console.log(localStorage);
+                dataLocal.innerHTML = 'Item localUserName supprimé';
+            });
+            /*
+            btnLocal.addEventListener('dblclick', function(){
+                console.log('dblClick');
+            });
+            */
+
+            btnClearLocal.addEventListener('click', function(){
+                localStorage.clear();
+                console.log(localStorage);
+                dataLocal.innerHTML = 'Local supprimé';
+            });
+
         });
         
     </script>
@@ -114,17 +164,68 @@
                         <input type="text" class="form-control" id="sessionUser" value="" />
                     </p>
                     <p>
-                        <button id="btnSession" class="btn btn-outline-primary session">
+                        <button id="btnSession" class="btn btn-outline-primary">
                             Sauvegarder UserName en session
                         </button>
                     </p>
                     <p>
-                        <button id="btnSessionClearItem" class="btn btn-outline-primary session">
+                        <button id="btnSessionClearItem" class="btn btn-outline-primary">
                             Supprimer item UserName en session
                         </button>
                     </p>
                     <p>
+                        <button id="btnClearSession" class="btn btn-outline-primary">
+                            Supprimer la session
+                        </button>
+                    </p>
+                    <p>
                         Session userName : <span id="dataSession"></span>
+                    </p>
+                </main>
+                <footer class="text-center">
+                    <a href="../">
+                        <button class="btn btn-outline-dark">
+                            Aller l'accueil
+                        </button>
+                    </a>
+                </footer>
+            </article>
+            <article class="col-lg-6">
+                <header>
+                    <h2>Le stockage des données</h2>
+                </header>
+                <main>
+                    <h3>localStorage</h3>
+                    <p>
+                        le localStorage enregistre les données et les conserve 
+                        tant qu'on ne supprime pas ou qu'on ne nettoie (clear) 
+                        pas le localStorage.
+                    </p>
+                    <p>
+                        En revanche, les données du localStorage restent disponibles 
+                        uniquement pour le domaine (url) du site où elles ont été créées
+                    </p>
+                    <p>
+                        <label class="form-label">UserName</label>
+                        <input type="text" class="form-control" id="localUser" value="" />
+                    </p>
+                    <p>
+                        <button id="btnLocal" class="btn btn-outline-primary">
+                            Sauvegarder UserName en local
+                        </button>
+                    </p>
+                    <p>
+                        <button id="btnLocalClearItem" class="btn btn-outline-primary">
+                            Supprimer item UserName en local
+                        </button>
+                    </p>
+                    <p>
+                        <button id="btnClearLocal" class="btn btn-outline-primary">
+                            Supprimer le local
+                        </button>
+                    </p>
+                    <p>
+                        Local userName : <span id="dataLocal"></span>
                     </p>
                 </main>
                 <footer class="text-center">
