@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Formation Javascript Ecmascript Inititation</title>
+    <link rel="stylesheet" href="../css/bootstrap.css" />
+    <script src="../js/bootstrap.bundle.js"></script>
+    <link rel="stylesheet" href="../css/style.css" />
+    <script>
+        console.log('début du chargement de la page');
+        // pour pouvoir agir sur le DOM, on va guetter un évènement 
+        // généré par la fenêtre qui nous indiquera le chargement
+        // complet de la page
+        window.addEventListener('DOMContentLoaded', function(){
+            console.log('DOMContentLoaded reçu');
+            // id du bouton session : btnSession
+            // je ne peux pas "guetter" l'événement "click" sur le bouton
+            // directement : la page n'yant pas fini de charger, j'ai le risque d'avoir une erreur
+            // let btnSession = document.getElementById('btnSession');
+            let btnSession = document.querySelector('button#btnSession');
+            let dataSession = document.querySelector('#dataSession');
+            let sessionUser = document.querySelector('#sessionUser');
+            let btnSessionClearItem = document.querySelector('#btnSessionClearItem');
+
+            console.log(sessionStorage);
+
+            if(sessionStorage.getItem('sessionUserName')){
+                dataSession.innerHTML = `<b> ${sessionStorage.getItem('sessionUserName')} </b>`;
+            }
+            
+            btnSession.addEventListener('click', function(){
+                //console.log('click');
+                if(sessionUser.value !== ''){
+                    //console.log(`input contient ${sessionUser.value}`);
+                    sessionStorage.setItem('sessionUserName', sessionUser.value);
+                    console.log(sessionStorage);
+                    dataSession.innerHTML = `<b> ${sessionStorage.getItem('sessionUserName')} </b>`;
+                }
+            });
+
+            btnSessionClearItem.addEventListener('click', function(){
+                //console.log('click');
+                sessionStorage.removeItem('sessionUserName');
+                console.log(sessionStorage);
+                dataSession.innerHTML = '';
+            });
+            /*
+            btnSession.addEventListener('dblclick', function(){
+                console.log('dblClick');
+            });
+            */
+        });
+        
+    </script>
+</head>
+
+<body>
+    <header class="bg-light text-center">
+        <h1>Formation Javascript Ecmascript</h1>
+    </header>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="https://github.com/nicoduflot/2022-01-03-js-init" target="_blank">GitHub</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+                aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="../">Accueil</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            Introduction
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <li><a class="dropdown-item" href="../intro/index.html">Introduction</a></li>
+                            <li><a class="dropdown-item" href="../intro/tableau.html">Tableaux</a></li>
+                            <li><a class="dropdown-item" href="../intro/fonction.html">Fonctions</a></li>
+                            <li>
+                                <a class="dropdown-item" href="../intro/destructuration.html">
+                                    La destructuration
+                                </a>
+                            </li>
+                            <li><a class="dropdown-item" href="../intro/storage.html">Storage</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <main class="container">
+        <section class="row">
+            <article class="col-lg-6">
+                <header>
+                    <h2>Le stockage des données</h2>
+                </header>
+                <main>
+                    <h3>sessionStorage</h3>
+                    <p>
+                        la session est stockée tant que la fenêtre ayant créée la donnée est ouverte.
+                        Si on ouvre une page du site dans un nouvel onglet ou fenêtre, 
+                        la session n'est pas transferée dans ce nouvel onglet ou fenêtre.
+                    </p>
+                    <p>
+                        Si on ferme la fenêtre, la session est automatiquement détruite.
+                    </p>
+                    <p>
+                        <label class="form-label">UserName</label>
+                        <input type="text" class="form-control" id="sessionUser" value="" />
+                    </p>
+                    <p>
+                        <button id="btnSession" class="btn btn-outline-primary session">
+                            Sauvegarder UserName en session
+                        </button>
+                    </p>
+                    <p>
+                        <button id="btnSessionClearItem" class="btn btn-outline-primary session">
+                            Supprimer item UserName en session
+                        </button>
+                    </p>
+                    <p>
+                        Session userName : <span id="dataSession"></span>
+                    </p>
+                </main>
+                <footer class="text-center">
+                    <a href="../">
+                        <button class="btn btn-outline-dark">
+                            Aller l'accueil
+                        </button>
+                    </a>
+                </footer>
+            </article>
+        </section>
+    </main>
+    <footer class="bg-light text-center">
+        &copy; Dawan JAN - 2022
+    </footer>
+    <script>
+        console.log('fin du chargement de la page');
+    </script>
+</body>
+
+</html>
