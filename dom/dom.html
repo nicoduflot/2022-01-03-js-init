@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Formation Javascript Ecmascript Inititation</title>
+    <link rel="stylesheet" href="../css/bootstrap.css" />
+    <script src="../js/bootstrap.bundle.js"></script>
+    <link rel="stylesheet" href="../css/style.css" />
+    <script src="../js/script.js"></script>
+    <script>
+        loaded(function(){
+            s('#creerP').addEventListener('click', function(event){
+                event.preventDefault();
+                let paragrapheAdded = document.createElement('p');
+                paragrapheAdded.setAttribute('id', 'pTestAjout');
+                console.log(paragrapheAdded);
+                let pParent = event.target.parentNode;
+                console.log(pParent);
+                let lorem = `Lorem ipsum dolor sit amet consectetur, 
+adipisicing elit. Repellat deleniti perspiciatis omnis quae? 
+Vero impedit omnis enim eveniet beatae distinctio perferendis 
+ullam reprehenderit, repellendus error. Deserunt dolorum minima 
+nesciunt molestias?`;
+                let content = document.createTextNode(lorem);
+                
+                paragrapheAdded.addEventListener('mouseover', function(){
+                    console.log(paragrapheAdded.innerHTML);
+                });
+                paragrapheAdded.addEventListener('click', function(){
+                    this.remove();
+                });
+                paragrapheAdded.appendChild(content);
+                pParent.after(paragrapheAdded);
+            });
+
+            let index = 1;
+            s('#btn').addEventListener('click', function(){
+                let paragraphe = cE('p');
+                paragraphe.setAttribute('id', `p_${index}`);
+                let div = s('#container') || cE('div');
+                div.setAttribute('id', 'container');
+                let lorem = `p_${index} Lorem ipsum dolor sit amet consectetur, 
+adipisicing elit. Repellat deleniti perspiciatis omnis quae? 
+Vero impedit omnis enim eveniet beatae distinctio perferendis 
+ullam reprehenderit, repellendus error. Deserunt dolorum minima 
+nesciunt molestias?`;
+                paragraphe.classList.add('triangle');
+                paragraphe.addEventListener('click', function(){
+                    this.remove();
+                    let pRestants = sAll('div#container p');
+                    console.log(pRestants);
+                    let newIndex = 1;
+                    pRestants.forEach(function(p){
+                        p.setAttribute('id', `p_${newIndex}`);
+                        newIndex++;
+                    });
+                });
+                let content = document.createTextNode(lorem);
+                paragraphe.appendChild(content);
+                div.appendChild(paragraphe);
+                s('#btn').after(div);
+
+                console.log(paragraphe);
+                index++;               
+            });
+
+            // créer une liste
+            /*
+            les éléments de la liste seront renseignés dans l'input, sur la touche Entrée ou
+            un clique sur le bouton ajouter, on ajoute l'élément à la liste, et on 
+            vide le champs de saisie.
+
+            dans la liste, un clique sur un élément de cette liste le supprime
+
+            on vérifiera si un élément renseigné n'est déjà pas dans la liste,
+            le cas échéant il ne sera pas ajouté en doublon
+            */
+
+            // récupérer en variables les différents éléments concernés sur la page
+        });
+    </script>
+</head>
+
+<body>
+    <header class="bg-light text-center">
+        <h1>Formation Javascript Ecmascript</h1>
+    </header>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="https://github.com/nicoduflot/2022-01-03-js-init" target="_blank">GitHub</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+                aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="../">Accueil</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            Introduction
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <li><a class="dropdown-item" href="../intro/index.html">Introduction</a></li>
+                            <li><a class="dropdown-item" href="../intro/tableau.html">Tableaux</a></li>
+                            <li><a class="dropdown-item" href="../intro/fonction.html">Fonctions</a></li>
+                            <li>
+                                <a class="dropdown-item" href="../intro/destructuration.html">
+                                    La destructuration
+                                </a>
+                            </li>
+                            <li><a class="dropdown-item" href="../intro/storage.html">Storage</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            Interractions DOM
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <li><a class="dropdown-item" href="../dom/index.html">Introduction</a></li>
+                            <li><a class="dropdown-item" href="../dom/dom.html">Créer dans le DOM</a></li>
+                            <li><a class="dropdown-item" href="../dom/css.html">DOM & CSS</a></li>
+                            <li><a class="dropdown-item" href="../dom/dataset.html">Le dataset</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <main class="container">
+        <section class="row">
+            <article class="col-sm-12">
+                <header>
+                    <h2>Créer dans le DOM</h2>
+                </header>
+                <main>
+                    <h3>Créer un pargraphe</h3>
+                    <p>
+                        à la suite de celui-ci en cliquant sur <a href="#" id="creerP">ce lien</a>.
+                    </p>
+                    <h3>Créer un pargraphe autrement</h3>
+                    <button id="btn" class="btn btn-outline-secondary">
+                        Ajouter un paragraphe
+                    </button>
+                </main>
+            </article>
+        </section>
+    </main>
+    <footer class="bg-light text-center">
+        &copy; Dawan JAN - 2022
+    </footer>
+    <script>
+        console.log('fin du chargement de la page');
+    </script>
+</body>
+
+</html>

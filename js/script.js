@@ -16,6 +16,11 @@ function sAll(selector){
     return document.querySelectorAll(selector);
 }
 
+//fontion raccourcie de création d'élément dans le DOM
+function cE(element){
+    return document.createElement(element);
+}
+
 // fonction de création et suppression de cookie
 // par défaut, dans durée en jour du cookie, le cookie appelé sera détruit
 // setCookie('monCookie'); // donne la date actuelle moins un jour en date d'expiration

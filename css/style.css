@@ -9,3 +9,13 @@ h1, .h1{
 .bordure-rouge{
     border: 1px solid red;
 }
+
+.triangle::before{
+    width: 0;
+    height: 0;
+    border-left: 10px solid darkred;
+    border-top: 0.35rem solid transparent;
+    border-bottom: 0.35rem solid transparent;
+    display: inline-block;
+    content: '';
+}
