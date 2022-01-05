@@ -10,8 +10,8 @@
     <link rel="stylesheet" href="../css/style.css" />
     <script src="../js/script.js"></script>
     <script>
-        loaded(function(){
-            s('#creerP').addEventListener('click', function(event){
+        loaded(function () {
+            s('#creerP').addEventListener('click', function (event) {
                 event.preventDefault();
                 let paragrapheAdded = document.createElement('p');
                 paragrapheAdded.setAttribute('id', 'pTestAjout');
@@ -24,11 +24,11 @@ Vero impedit omnis enim eveniet beatae distinctio perferendis
 ullam reprehenderit, repellendus error. Deserunt dolorum minima 
 nesciunt molestias?`;
                 let content = document.createTextNode(lorem);
-                
-                paragrapheAdded.addEventListener('mouseover', function(){
+
+                paragrapheAdded.addEventListener('mouseover', function () {
                     console.log(paragrapheAdded.innerHTML);
                 });
-                paragrapheAdded.addEventListener('click', function(){
+                paragrapheAdded.addEventListener('click', function () {
                     this.remove();
                 });
                 paragrapheAdded.appendChild(content);
@@ -36,7 +36,7 @@ nesciunt molestias?`;
             });
 
             let index = 1;
-            s('#btn').addEventListener('click', function(){
+            s('#btn').addEventListener('click', function () {
                 let paragraphe = cE('p');
                 paragraphe.setAttribute('id', `p_${index}`);
                 let div = s('#container') || cE('div');
@@ -47,12 +47,12 @@ Vero impedit omnis enim eveniet beatae distinctio perferendis
 ullam reprehenderit, repellendus error. Deserunt dolorum minima 
 nesciunt molestias?`;
                 paragraphe.classList.add('triangle');
-                paragraphe.addEventListener('click', function(){
+                paragraphe.addEventListener('click', function () {
                     this.remove();
                     let pRestants = sAll('div#container p');
                     console.log(pRestants);
                     let newIndex = 1;
-                    pRestants.forEach(function(p){
+                    pRestants.forEach(function (p) {
                         p.setAttribute('id', `p_${newIndex}`);
                         newIndex++;
                     });
@@ -63,7 +63,7 @@ nesciunt molestias?`;
                 s('#btn').after(div);
 
                 console.log(paragraphe);
-                index++;               
+                index++;
             });
 
             // créer une liste
@@ -79,6 +79,54 @@ nesciunt molestias?`;
             */
 
             // récupérer en variables les différents éléments concernés sur la page
+            let input = s('#item');
+            let btn = s('#addItemBtn');
+            let liste = s('#toDoList');
+            let message = s('#siDoublon');
+
+            function addElement() {
+                if ('' !== input.value) {
+                    let val = input.value;
+                    input.value = '';
+                    input.focus();
+                    //console.log(Array.from(liste.children).map( c => c.textContent ).includes(val));
+                    //console.log(Array.from(liste.children));
+                    /*
+                    Array.from(liste.children).map( function(c){
+                        if(c.textContent.includes(val)){
+                            console.log(c.textContent, val);
+                            return;
+                        }
+                    });
+                    */
+                    if (Array.from(liste.children).map(c => c.textContent).includes(val)) {
+                        return false;
+                    }
+                    let li = cE('li');
+                    li.textContent = val;
+                    li.addEventListener('click', function () {
+                        this.remove();
+                    });
+                    liste.appendChild(li);
+                    message.classList.add('div-invisible');
+                    return true;
+                }
+            }
+
+            btn.addEventListener('click', function () {
+                if (!addElement()) {
+                    message.classList.remove('div-invisible');
+                }
+            });
+
+            //input.addEventListener('keyup', function(event){
+            input.addEventListener('keyup', event => { // équivalent avec l'opérateur arrow
+                if ('Enter' === event.key) {
+                    if (!addElement()) {
+                        message.classList.remove('div-invisible');
+                    }
+                }
+            });
         });
     </script>
 </head>
@@ -159,6 +207,10 @@ nesciunt molestias?`;
                     <div class="wrapperToDo">
                         <div id="createItemList">
                             <h3>Éléments de la liste a renseigner</h3>
+                            <div id="siDoublon" class="alert alert-warning div-invisible"
+                                role="alert">
+                                <strong>ATTENTION</strong> cette valeur existe déjà...
+                            </div>
                             <p>
                                 <input type="text" class="form-control" id="item" />
                             </p>
@@ -171,7 +223,7 @@ nesciunt molestias?`;
                     </div>
                 </main>
                 <footer>
-                    
+
                 </footer>
             </article>
             <article class="col-md-6">

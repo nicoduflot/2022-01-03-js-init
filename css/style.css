@@ -19,3 +19,26 @@ h1, .h1{
     display: inline-block;
     content: '';
 }
+
+.div-invisible{
+    display: none;
+}
+
+ul#toDoList{
+    padding: 0;
+}
+
+ul#toDoList li{
+    list-style-type: none;
+    cursor: pointer;
+    padding: 2px 2px;
+    border-radius: 2px;
+}
+
+ul#toDoList li:hover{
+    background-color: var(--bs-blue);
+}
+
+div#container p{
+    border: 1px dashed #666;
+}
