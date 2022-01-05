@@ -12,26 +12,32 @@
     <script>
         loaded(function () {
             let cible = s('#cible');
-            
-            s('#btn').addEventListener('click', function(){
-                if(cible.style.color !== ''){
+
+            s('#btn').addEventListener('click', function () {
+                if (cible.style.color !== '') {
                     cible.style.removeProperty('color');
-                }else{
+                } else {
                     cible.style.setProperty('color', '#aacc00');
                 }
             });
 
-            s('#btnGras').addEventListener('click', function(){
-                if(cible.style.fontWeight !== ''){
+            s('#btnGras').addEventListener('click', function () {
+                if (cible.style.fontWeight !== '') {
                     cible.style.removeProperty('font-weight');
-                }else{
+                } else {
                     cible.style.setProperty('font-weight', 'bold');
                 }
             });
-            
+
             s('#btnClass').addEventListener('click', () => s('#cibleClass').classList.toggle('paragraphe-vert'));
             s('#btnClassGras').addEventListener('click', () => s('#cibleClass').classList.toggle('paragraphe-gras'));
 
+            let carre = s('#carre');
+            s('#gauche').addEventListener('click', () => carre.className = 'left');
+            s('#centre').addEventListener('click', () => carre.removeAttribute('class'));
+            s('#droite').addEventListener('click', () => carre.className = 'right');
+
+            
         });
     </script>
 </head>
@@ -100,9 +106,9 @@
                         gérer le gras
                     </button>
                     <p id="cible">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-                        Earum perferendis ducimus minima in facilis nulla sapiente 
-                        tempora? Fugiat saepe illum ducimus officia, eligendi 
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                        Earum perferendis ducimus minima in facilis nulla sapiente
+                        tempora? Fugiat saepe illum ducimus officia, eligendi
                         cumque distinctio omnis blanditiis consequuntur reiciendis quam?
                     </p>
                     <h3>En agissant sur les classes d'un élément</h3>
@@ -113,9 +119,9 @@
                         gérer le gras
                     </button>
                     <p id="cibleClass">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-                        Earum perferendis ducimus minima in facilis nulla sapiente 
-                        tempora? Fugiat saepe illum ducimus officia, eligendi 
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                        Earum perferendis ducimus minima in facilis nulla sapiente
+                        tempora? Fugiat saepe illum ducimus officia, eligendi
                         cumque distinctio omnis blanditiis consequuntur reiciendis quam?
                     </p>
                 </main>
@@ -127,23 +133,17 @@
                     <h2>Animer un élément</h2>
                 </header>
                 <main>
-                    <div class="wrapperToDo">
-                        <div id="createItemList">
-                            <h3>Éléments de la liste a renseigner</h3>
-                            <div id="siDoublon" class="alert alert-warning div-invisible"
-                                role="alert">
-                                <strong>ATTENTION</strong> cette valeur existe déjà...
-                            </div>
-                            <p>
-                                <input type="text" class="form-control" id="item" />
-                            </p>
-                            <p>
-                                <button id="addItemBtn" class="btn btn-secondary">
-                                    Ajouter
-                                </button>
-                            </p>
-                        </div>
-                    </div>
+                    <p>
+                        Comme il est possible de créer des transitions de déplacement
+                        d'éléments en CSS, en jouant avec les classes sur un élément
+                        il devient possible de "manipuler" cet élément.
+                    </p>
+                    <p class="btn-group" role="group" id="control">
+                        <button class="btn btn-outline-primary" id="gauche">Gauche</button>
+                        <button class="btn btn-outline-primary" id="centre">Centre</button>
+                        <button class="btn btn-outline-primary" id="droite">Droite</button>
+                    </p>
+                    <div id="carre"></div>
                 </main>
                 <footer>
 
