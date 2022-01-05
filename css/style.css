@@ -42,3 +42,11 @@ ul#toDoList li:hover{
 div#container p{
     border: 1px dashed #666;
 }
+
+.paragraphe-vert{
+    color: #aacc00;
+}
+
+.paragraphe-gras{
+    font-weight: bold;
+}
