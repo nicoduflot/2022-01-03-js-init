@@ -70,3 +70,11 @@ div#container p{
 #coord td[data-column][data-line], #selector td[data-column][data-line]{
     text-align: center;
 }
+
+.article{
+    display: none;
+}
+
+.article.active{
+    display: block;
+}

@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Formation Javascript Ecmascript Inititation</title>
+    <link rel="stylesheet" href="../css/bootstrap.css" />
+    <script src="../js/bootstrap.bundle.js"></script>
+    <link rel="stylesheet" href="../css/style.css" />
+    <script src="../js/script.js"></script>
+    <script>
+        loaded(function () {
+            let linkMatiere = sAll('#matiere a');
+            let partBio = sAll('div.article');
+            console.log(linkMatiere);
+            linkMatiere.forEach(link => {
+                link.addEventListener('click', function (event) {
+                    event.preventDefault();
+                    let partAffiche = this.dataset.part;
+                    //console.log(this.dataset.part);
+                    
+                    partBio.forEach(function(part){
+                        part.classList.remove('active');
+                    });
+                    partBio.forEach(function(part){
+                        //console.log(part.id);
+                        if(partAffiche === part.id){
+                            part.classList.add('active');
+                        }
+                    });
+                    
+                });
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <header class="bg-light text-center">
+        <h1>Formation Javascript Ecmascript</h1>
+    </header>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="https://github.com/nicoduflot/2022-01-03-js-init" target="_blank">GitHub</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+                aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="../">Accueil</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            Introduction
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <li><a class="dropdown-item" href="../intro/index.html">Introduction</a></li>
+                            <li><a class="dropdown-item" href="../intro/tableau.html">Tableaux</a></li>
+                            <li><a class="dropdown-item" href="../intro/fonction.html">Fonctions</a></li>
+                            <li>
+                                <a class="dropdown-item" href="../intro/destructuration.html">
+                                    La destructuration
+                                </a>
+                            </li>
+                            <li><a class="dropdown-item" href="../intro/storage.html">Storage</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            Interractions DOM
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <li><a class="dropdown-item" href="../dom/index.html">Introduction</a></li>
+                            <li><a class="dropdown-item" href="../dom/dom.html">Créer dans le DOM</a></li>
+                            <li><a class="dropdown-item" href="../dom/css.html">DOM & CSS</a></li>
+                            <li><a class="dropdown-item" href="../dom/dataset.html">Le dataset</a></li>
+                            <li><a class="dropdown-item" href="../dom/td.html">Table de matière</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <main class="container">
+        <section class="row">
+            <article class="col-md-12">
+                <header>
+                    <h2>Exemple table des matière</h2>
+                </header>
+                <main>
+                    <h2>Terry Pratchett</h2>
+                    <h2 id="mw-toc-heading">Sommaire</h2><span class="toctogglespan"><label class="toctogglelabel"
+                            for="toctogglecheckbox"></label></span></div>
+                    <ul id="matiere">
+                        <li><a href="#Biographie" data-part="Biographie">Biographie</a>
+                            <ul>
+                                <li><a href="#Jeunesse" data-part="Jeunesse">Jeunesse</a></li>
+                                <li><a href="#Carriere" data-part="Carriere">Carrière</a></li>
+                                <li><a href="#Vie_personnelle" data-part="Vie_personnelle">Vie personnelle</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <div id="Biographie" class="article active">
+                        <h2>Biographie</h2>
+                        <p>
+                            Terry Pratchett, né le 28 avril 1948 à Beaconsfield (Buckinghamshire) et mort
+                            le 12 mars 2015 à Broad Chalke (Wiltshire)2, est un écrivain britannique.
+                            Il est principalement connu pour ses romans de fantasy humoristique prenant
+                            place dans l'univers du Disque-monde, dans lequel il détourne les canons du
+                            genre pour se livrer à une satire de divers aspects de la société contemporaine.
+                        </p>
+                        <p>
+                            Pratchett publie son premier roman en 1971, mais ce n'est qu'en 1983 qu'il rencontre
+                            vraiment le succès avec le premier volume des Annales du Disque-monde. Il devient par
+                            la suite l'un des auteurs de fantasy les plus prolifiques (les Annales comptent plus
+                            de trente tomes) et les plus appréciés. Ses livres se sont vendus à plus de 85 millions
+                            d'exemplaires dans 37 langues. Pratchett est ainsi l'auteur britannique le plus vendu
+                            des années 1990. Selon un sondage publié en 2006 dans le magazine littéraire britannique
+                            Book Magazine, Terry Pratchett est alors le second auteur vivant le plus apprécié de
+                            ses compatriotes, derrière J. K. Rowling.
+                        </p>
+                        <p>
+                            Il est anobli par la reine en 2008, et reçoit de nombreuses récompenses pour son œuvre.
+                            Atteint d'une forme rare de la maladie d'Alzheimer, il milite pendant ses dernières
+                            années en faveur du droit au suicide assisté, notamment dans son documentaire Choosing to
+                            Die
+                            (en).
+                        </p>
+                    </div>
+                    <div id="Jeunesse" class="article">
+                        <h2>Jeunesse</h2>
+                        <p>
+                            Terence David John Pratchett est né le 28 avril 1948 à
+                            Beaconsfield dans le Buckinghamshire, en Angleterre.
+                            Il est le fils unique de David et Eileen Pratchett,
+                            originaires de Hay-on-Wye. La famille déménage à Bridgwater dans
+                            le Somerset en 1957, où Terry intègre la John Hampden Grammar School3. Il se décrit comme un
+                            «
+                            étudiant indescriptible » et affirme devoir son éducation à la bibliothèque publique de
+                            Beaconsfield4.
+                        </p>
+
+                        <p>
+                            Il s'intéresse à l'astronomie5 : il collectionne les cartes concernant l'espace offertes
+                            dans
+                            les paquets de thé Brooke Bond, possède un télescope6 et rêve de devenir astronome, mais il
+                            n'est pas assez doué en mathématiques5,7. Son intérêt se porte ensuite sur les romans de
+                            science-fiction anglais et américains6, ce qui l'amène à assister à des conventions de
+                            science-fiction à partir de 1963-1964, jusqu'à ce qu'il commence à travailler6. Ses
+                            premières
+                            lectures incluent les œuvres de H. G. Wells et d'Arthur Conan Doyle, ainsi que « tous les
+                            livres
+                            qu'on se doit de lire », ce qu'il considère comme « la construction d'une éducation »7.
+                        </p>
+                        <p>
+                            À 13 ans, Terry Pratchett publie sa première nouvelle, The Hades Business, dans le magazine
+                            de
+                            l'école. Elle est publiée commercialement alors qu'il a 15 ans4,8.
+                        </p>
+                        <p>
+                            Il suit des cours d'arts, d'anglais et d'histoire. Il choisit d'embrasser la carrière de
+                            journaliste avant la fin de ses études et est embauché à 17 ans, en 1965, au journal local
+                            Bucks
+                            Free Press9. Il y écrit, entre autres, plusieurs histoires pour la section Children's Circle
+                            sous le pseudonyme d'Uncle Jim. Un des épisodes fait apparaître les personnages de son futur
+                            roman Le Peuple du Tapis. Pendant ses jours de repos, il parvient à décrocher des diplômes
+                            avancés en anglais (A-level) tout en prenant des cours de journalisme9.
+                        </p>
+                        </div>
+                        <div id="Carriere" class="article">
+                        <h2>Carrière</h2>
+                        <p>
+                            En 1968, Pratchett, alors journaliste, réalise l'interview de Peter Bander Van Duren, le
+                            codirecteur de Colin Smythe Limited, une petite maison d'édition de Gerrards Cross. Lors de
+                            cette rencontre, Pratchett mentionne le livre qu'il a écrit, Le Peuple du Tapis10. Bander
+                            Van
+                            Duren et Colin Smythe acceptent d'éditer le livre en 1971, avec des illustrations de
+                            Pratchett
+                            lui-même9. Il reçoit des critiques favorables, bien que peu nombreuses9. Pratchett
+                            renouvelle
+                            l'expérience avec deux autres romans de science-fiction : La Face obscure du Soleil en 1976
+                            et
+                            Strate-à-gemmes en 19819.
+                        </p>
+                        <p>
+                            En 1980, après avoir changé plusieurs fois d'employeur, il devient chargé des relations
+                            publiques pour le Central Electricity Generating Board (bureau pour l’énergie) dans une zone
+                            qui
+                            recouvrait plusieurs centrales nucléaires8. Par la suite, il affirme en plaisantant avoir
+                            choisi
+                            le moment idéal : quelques mois plus tôt s'est produit l’accident nucléaire de Three Mile
+                            Island
+                            aux États-Unis11.
+                        </p>
+                        <p>
+
+                            Son premier roman de la série Disque-monde est publié en 1983 par Colin Smythe Limited. Les
+                            droits pour la version poche sont rapidement acquis par Corgi, une filiale de l'éditeur
+                            Transworld. L'auteur gagne en popularité lorsqu'il est mis en avant dans l'émission radio de
+                            la
+                            BBC « Woman's Hour » ; il signe alors chez l'éditeur Victor Gollancz, dont il est le premier
+                            auteur de fantasy. Colin Smythe devient son agent9. À cette époque, Pratchett prend
+                            l'habitude
+                            d'écrire tous les soirs après le travail, environ 400 mots12.
+                        </p>
+                        <p>
+                            Terry Pratchett rencontre un tel succès qu'il peut abandonner son poste au CEGB en 1987,
+                            après
+                            la publication du quatrième volume du Disque-monde, Mortimer8. Il se consacre ensuite
+                            exclusivement à l'écriture, et voit ses ventes décoller : ses livres figurent fréquemment
+                            dans
+                            le haut des classements de best-sellers. Selon le journal The Times, Pratchett est l'auteur
+                            britannique le plus lu en 19969 et également le plus vendu des années 199013,14. Selon le
+                            Bookseller's Pocket Yearbook de 2005, les ventes britanniques de Pratchett en 2003
+                            représentent
+                            3,4 % du marché de la fiction en format relié, ce qui le classe deuxième derrière J. K.
+                            Rowling
+                            (6 %). Les versions poche de ses ouvrages représentent quant à elles 1,2 % du marché15. Il
+                            se
+                            vend en effet plus de 2,5 millions de livres de Pratchett par an, rien qu'au Royaume-Uni16.
+                        </p>
+                    </div>
+                    <div id="Vie_personnelle" class="article">
+                        <h2>Vie personnelle</h2>
+                        <p>
+                            Terry Pratchett se marie en 1968 avec Lyn Purves9. Ils déménagent à Rowberrow, près de
+                            Shipham
+                            dans le Somerset en 1970. Ils ont une fille, Rhianna, en 1976 ; elle devient journaliste
+                            puis
+                            scénariste de jeux vidéo17. La famille déménage en 1993 dans un village au nord-ouest de
+                            Salisbury, dans le Wiltshire. Terry Pratchett dit aimer « l'écriture, la marche, les
+                            ordinateurs, et la vie18 ». Il se décrit comme un humaniste, soutient activement la British
+                            Humanist Association19 et est membre de la National Secular Society20.
+                        </p>
+                        <p>
+                            Très proche de ses lecteurs, il a souvent participé aux forums de discussion qui lui sont
+                            consacrés sur Usenet : alt.books.pratchett et alt.fan.pratchett. Selon un sondage publié en
+                            2006
+                            dans le magazine littéraire britannique Book Magazine, Terry Pratchett est le second auteur
+                            vivant le plus apprécié de ses compatriotes, derrière J. K. Rowling21.
+                        </p>
+                        <p>
+
+                            Parmi ses autres passions, l'histoire naturelle a une place importante. Il possède notamment
+                            une
+                            serre avec des plantes carnivores22.
+                            Blason de Sir Terence
+                        </p>
+                        <p>
+                            Le 31 décembre 2008, il est anobli par la reine et devient Knight Bachelor23,24, ce qui lui
+                            confère le droit d'être appelé « Sir Terence ». Il commente alors : « N'importe quel auteur
+                            de
+                            fantasy a envie de devenir chevalier. Vous savez, je suis à deux doigts de m'acheter un
+                            cheval
+                            et une épée25. » Fin 2009, il entreprend de se fabriquer une épée avec l'aide d'amis. Il
+                            explique plus tard au Times Higher Education avoir récolté du minerai de fer, construit un
+                            four
+                            et fondu une lame ; son vieil ami et agent Colin Smythe lui offre même quelques morceaux de
+                            météorite de fer qu'il ajoute à l'alliage26,27.
+                        </p>
+                        <p>
+                            Le 28 avril 2010, son blason, créé par Hubert Chesshyre, fut accordé par Clarenceux et
+                            Garter du
+                            College of Arms. La chouette (Ninoxe boubouk, ou Morepork en anglais) reposant sur de l'eau
+                            et
+                            la croix Ânkh sont des références à la cité d'Ankh-Morpork (la ville jumelle composée des
+                            vieilles villes d'Ankh et de Morpork séparées par la rivière). Elles figurent sur le blason
+                            de
+                            la cité 28 comme décrit dans le Roman Pieds d'argile (1996) où l'auteur critique à sa
+                            manière
+                            ironique l'héraldique et Collège Royal Héraldique d'Ankh-Morpork (l'équivalent Morporkien du
+                            College of Arms). Les livres rouges (de gueules selon le terme héraldique ) représentent
+                            l’œuvre
+                            de l'auteur qui lui valut son anoblissement.
+                        </p>
+                        <p>
+                            La devise NOLI TIMERE MESSOREM signifie en latin Ne craignez pas le Faucheur. La Mort
+                            (personnage présent dans presque tous ses livres), ainsi que son acceptation étant des
+                            sujets
+                            clé de l’œuvre de Terry Pratchett. L'utilisation de majuscules, bien qu'habituelle dans ce
+                            contexte, ne peut que rappeler l'"élocution" de la Mort tout au long de l’œuvre. En effet,
+                            lorsque la Mort (ou celui ou celle qui le remplace) parle, ses propos sont systématiquement
+                            écrits en majuscules.
+                        </p>
+                        <p>
+                            Le 12 mars 2015, la mort de Terry Pratchett fut communiquée (entre autres) par le biais de
+                            Twitter. Ses trois derniers tweets (postés par son assistant Rob Wilkins) ont marqué ses
+                            très
+                            nombreux admirateurs29 :
+                        </p>
+                        <p>
+                            Terry took Death’s arm and followed him through the doors and on to the black desert under
+                            the
+                            endless night.
+                        </p>
+                        <p>
+                            (Terry prit le bras de la Mort et le suivit à travers les portes vers le noir désert dans la
+                            nuit infinie.)
+                        </p>
+                        <p>
+                            The End.
+                        </p>
+                        <p>
+                            (Fin).
+                        </p>
+                        <p>
+                            C'est ainsi que ses proches ont choisi de lui rendre hommage, en lui faisant quitter ce
+                            monde
+                            tel un de ses personnages.
+                        </p>
+                        <p>
+                            Malgré ses plaidoyers pour le suicide assisté, il semblerait que sa mort fût naturelle30.
+                        </p>
+                    </div>
+                </main>
+            </article>
+        </section>
+    </main>
+    <footer class="bg-light text-center">
+        &copy; Dawan JAN - 2022
+    </footer>
+    <script>
+        console.log('fin du chargement de la page');
+    </script>
+</body>
+
+</html>
