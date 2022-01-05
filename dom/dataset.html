@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Formation Javascript Ecmascript Inititation</title>
+    <link rel="stylesheet" href="../css/bootstrap.css" />
+    <script src="../js/bootstrap.bundle.js"></script>
+    <link rel="stylesheet" href="../css/style.css" />
+    <script src="../js/script.js"></script>
+    <script>
+        loaded(function () {
+            //<p data-exemple="ma variable exemple" data-test="test">
+                let pExemple = s('p[data-exemple][data-test="test"]');
+            console.log(pExemple);
+            console.log(pExemple.dataset);
+            console.log(pExemple.dataset.exemple);
+
+            /*
+            // récupérer la liste des nodes possédant l'attribut class
+            let allClassUsed = sAll('[class]');
+            console.log(allClassUsed);
+            */
+
+            let pModule = sAll('p[data-module]');
+            pModule.forEach( element => {
+                let module = element.dataset.module;
+                // selon le data-module de l'élément
+                switch(module){
+                    case 'color': 
+                        // code quand module = color
+                        let color = element.dataset.color || '#ff0000';
+                        element.addEventListener('mouseover', function(){ this.style.color = color});
+                        element.addEventListener('mouseout', function(){ this.style.removeProperty('color')});
+                    break;
+                    case 'font':
+                    case 'magie':
+                        // code quand module = font ou module = magie
+                        let weight = element.dataset.weight || 'lighter';
+                        element.addEventListener('mouseover', function(){ this.style.fontWeight = weight});
+                        element.addEventListener('mouseout', function(){ this.style.removeProperty('font-weight')});
+                    break;
+                    case 'after':
+                    default: 
+                        // code quand module = after ou quand le module n'est pas 
+                        // répertorié dans le switch
+                }
+
+            });
+
+            // tableau coord 
+            let coordonnees = sAll('#coord td[data-column][data-line]');
+            let xValue = s('#xValue');
+            let yValue = s('#yValue');
+
+            coordonnees.forEach( element => {
+                let column = element.dataset.column;
+                let line = element.dataset.line;
+                element.addEventListener('mouseover', function(){
+                    element.parentNode.style.backgroundColor = 'rgba(255, 0, 0, 0.5)';
+                    sAll(`#coord td[data-column="${column}"]`).forEach( td => {
+                        td.style.backgroundColor = 'rgba(255, 0, 0, 0.5)';
+                    });
+                    s('#xy').innerHTML = `x : ${column} - y : ${line}`;
+                    xValue.value = column;
+                    yValue.value = line;
+                })
+
+                element.addEventListener('mouseout', function(){
+                    element.parentNode.style.removeProperty('background-color');
+                    sAll(`#coord td[data-column="${column}"]`).forEach( td => {
+                        td.style.removeProperty('background-color');
+                    });
+                    s('#xy').innerHTML = `x : &nbsp; - y : &nbsp;`;
+                    xValue.value = 0;
+                    yValue.value = 0;
+                })
+            });
+
+            let selector = sAll('#selector td[data-column][data-line]');
+            let xSelector = s('#xSelector');
+            let ySelector = s('#ySelector');
+
+            let baseX = xSelector.value;
+            let baseY = ySelector.value;
+
+            function enlightTable(column, line){
+                s(`#selector td[data-column="${column}"][data-line="${line}"]`).parentNode.style.backgroundColor = 'rgba(255, 0, 0, 0.5)';
+                sAll(`#selector td[data-column="${column}"]`).forEach( td => {
+                    td.style.backgroundColor = 'rgba(255, 0, 0, 0.5)';
+                });
+            }
+
+            function clearLightTable(selector){
+                selector.forEach(element => {
+                    element.parentNode.style.removeProperty('background-color');
+                    element.style.removeProperty('background-color');
+                });
+            }
+
+            enlightTable(baseX, baseY);
+
+            xSelector.addEventListener('change', function(){
+                clearLightTable(selector);
+                baseX = xSelector.value;
+                baseY = ySelector.value;
+                enlightTable(baseX, baseY);
+            });
+
+            ySelector.addEventListener('change', function(){
+                clearLightTable(selector);
+                baseX = xSelector.value;
+                baseY = ySelector.value;
+                enlightTable(baseX, baseY);
+            });
+
+        });
+    </script>
+</head>
+
+<body>
+    <header class="bg-light text-center">
+        <h1>Formation Javascript Ecmascript</h1>
+    </header>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="https://github.com/nicoduflot/2022-01-03-js-init" target="_blank">GitHub</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+                aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="../">Accueil</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            Introduction
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <li><a class="dropdown-item" href="../intro/index.html">Introduction</a></li>
+                            <li><a class="dropdown-item" href="../intro/tableau.html">Tableaux</a></li>
+                            <li><a class="dropdown-item" href="../intro/fonction.html">Fonctions</a></li>
+                            <li>
+                                <a class="dropdown-item" href="../intro/destructuration.html">
+                                    La destructuration
+                                </a>
+                            </li>
+                            <li><a class="dropdown-item" href="../intro/storage.html">Storage</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            Interractions DOM
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <li><a class="dropdown-item" href="../dom/index.html">Introduction</a></li>
+                            <li><a class="dropdown-item" href="../dom/dom.html">Créer dans le DOM</a></li>
+                            <li><a class="dropdown-item" href="../dom/css.html">DOM & CSS</a></li>
+                            <li><a class="dropdown-item" href="../dom/dataset.html">Le dataset</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <main class="container">
+        <section class="row">
+            <article class="col-md-6">
+                <header>
+                    <h2>Les attributs data ou dataset ou data-attribute</h2>
+                </header>
+                <main>
+                    <p data-exemple="ma variable exemple" data-test="test">
+                        Les attributs data- sont des attributs HTML dynamiques.
+                        Ce qui est dynamique : leurs noms et les valeurs qu'ils possèdent.
+                        Pour les utiliser, on crée dans la balise un attribut avec la forme suivante :
+                        <code>data-*="..."</code>, * sera le nom du dataset, ... sa valeur.
+                        par exemple <br />
+                        <code>
+                            &lt;img data-over="../images/test.png" src="../images/test-img.png" data-test="test" /&gt;
+                        </code><br />
+                        pour atteindre ce dataset : <br />
+                        <code>
+                            let urlOver = document.querySelector('img[data-over][data-test="test"]').dataset.over;
+                        </code>
+                    </p>
+                    <p data-exemple="ma variable exemple" data-test="haha">
+                        test
+                    </p>
+                    <hr />
+                    <p data-module="color">
+                        Lorem ipsum dolor, sit amet consectetur adipisicing elit. 
+                        Iure a voluptatibus laborum ab nisi tenetur eius maiores, 
+                        perspiciatis veniam consequatur pariatur eum possimus 
+                        aspernatur dolor tempora rem qui facere ea.
+                    </p>
+                    <p data-module="color" data-color="#09f">
+                        Lorem ipsum dolor, sit amet consectetur adipisicing elit. 
+                        Iure a voluptatibus laborum ab nisi tenetur eius maiores, 
+                        perspiciatis veniam consequatur pariatur eum possimus 
+                        aspernatur dolor tempora rem qui facere ea.
+                    </p>
+                    <p data-module="color" data-color="orange">
+                        Lorem ipsum dolor, sit amet consectetur adipisicing elit. 
+                        Iure a voluptatibus laborum ab nisi tenetur eius maiores, 
+                        perspiciatis veniam consequatur pariatur eum possimus 
+                        aspernatur dolor tempora rem qui facere ea.
+                    </p>
+                    <p data-module="font" data-weight="bold">
+                        Lorem ipsum dolor, sit amet consectetur adipisicing elit. 
+                        Iure a voluptatibus laborum ab nisi tenetur eius maiores, 
+                        perspiciatis veniam consequatur pariatur eum possimus 
+                        aspernatur dolor tempora rem qui facere ea.
+                    </p>
+                    <p data-module="magie">
+                        Lorem ipsum dolor, sit amet consectetur adipisicing elit. 
+                        Iure a voluptatibus laborum ab nisi tenetur eius maiores, 
+                        perspiciatis veniam consequatur pariatur eum possimus 
+                        aspernatur dolor tempora rem qui facere ea.
+                    </p>
+                    <p data-module="after">
+                        Lorem ipsum dolor, sit amet consectetur adipisicing elit. 
+                        Iure a voluptatibus laborum ab nisi tenetur eius maiores, 
+                        perspiciatis veniam consequatur pariatur eum possimus 
+                        aspernatur dolor tempora rem qui facere ea.
+                    </p>
+                </main>
+            </article>
+            <article class="col-md-6">
+                <header>
+                    <h2>Les attributs data ou dataset ou data-attribute</h2>
+                </header>
+                <main>
+                    <p>
+                        Coordonnées : <span id="xy">x : &nbsp; - y : &nbsp;</span>
+                    </p>
+                    <p>
+                        <label class="form-label">X : </label><input class="form-control" type="range" id="xValue" min="0" max="4" value="0" /><br />
+                        <label class="form-label">Y : </label><input class="form-control" type="range" id="yValue" min="0" max="4" value="0" />
+                    </p>
+                    <table id="coord" class="table">
+                        <tr>
+                            <td data-column="0" data-line="0">0 - 0</td>
+                            <td data-column="1" data-line="0">1 - 0</td>
+                            <td data-column="2" data-line="0">2 - 0</td>
+                            <td data-column="3" data-line="0">3 - 0</td>
+                            <td data-column="4" data-line="0">4 - 0</td>
+                        </tr>
+                        <tr>
+                            <td data-column="0" data-line="1">0 - 1</td>
+                            <td data-column="1" data-line="1">1 - 1</td>
+                            <td data-column="2" data-line="1">2 - 1</td>
+                            <td data-column="3" data-line="1">3 - 1</td>
+                            <td data-column="4" data-line="1">4 - 1</td>
+                        </tr>
+                        <tr>
+                            <td data-column="0" data-line="2">0 - 2</td>
+                            <td data-column="1" data-line="2">1 - 2</td>
+                            <td data-column="2" data-line="2">2 - 2</td>
+                            <td data-column="3" data-line="2">3 - 2</td>
+                            <td data-column="4" data-line="2">4 - 2</td>
+                        </tr>
+                        <tr>
+                            <td data-column="0" data-line="3">0 - 3</td>
+                            <td data-column="1" data-line="3">1 - 3</td>
+                            <td data-column="2" data-line="3">2 - 3</td>
+                            <td data-column="3" data-line="3">3 - 3</td>
+                            <td data-column="4" data-line="3">4 - 3</td>
+                        </tr>
+                        <tr>
+                            <td data-column="0" data-line="4">0 - 4</td>
+                            <td data-column="1" data-line="4">1 - 4</td>
+                            <td data-column="2" data-line="4">2 - 4</td>
+                            <td data-column="3" data-line="4">3 - 4</td>
+                            <td data-column="4" data-line="4">4 - 4</td>
+                        </tr>
+                    </table>
+                    <hr />
+                    <p>
+                        <label class="form-label">X : </label>
+                        <input class="form-control" type="range" id="xSelector" min="0" max="4" value="0" /><br />
+                        <label class="form-label">Y : </label>
+                        <input class="form-control" type="range" id="ySelector" min="0" max="4" value="0" />
+                    </p>
+                    <table id="selector" class="table">
+                        <tr>
+                            <td data-column="0" data-line="0">0 - 0</td>
+                            <td data-column="1" data-line="0">1 - 0</td>
+                            <td data-column="2" data-line="0">2 - 0</td>
+                            <td data-column="3" data-line="0">3 - 0</td>
+                            <td data-column="4" data-line="0">4 - 0</td>
+                        </tr>
+                        <tr>
+                            <td data-column="0" data-line="1">0 - 1</td>
+                            <td data-column="1" data-line="1">1 - 1</td>
+                            <td data-column="2" data-line="1">2 - 1</td>
+                            <td data-column="3" data-line="1">3 - 1</td>
+                            <td data-column="4" data-line="1">4 - 1</td>
+                        </tr>
+                        <tr>
+                            <td data-column="0" data-line="2">0 - 2</td>
+                            <td data-column="1" data-line="2">1 - 2</td>
+                            <td data-column="2" data-line="2">2 - 2</td>
+                            <td data-column="3" data-line="2">3 - 2</td>
+                            <td data-column="4" data-line="2">4 - 2</td>
+                        </tr>
+                        <tr>
+                            <td data-column="0" data-line="3">0 - 3</td>
+                            <td data-column="1" data-line="3">1 - 3</td>
+                            <td data-column="2" data-line="3">2 - 3</td>
+                            <td data-column="3" data-line="3">3 - 3</td>
+                            <td data-column="4" data-line="3">4 - 3</td>
+                        </tr>
+                        <tr>
+                            <td data-column="0" data-line="4">0 - 4</td>
+                            <td data-column="1" data-line="4">1 - 4</td>
+                            <td data-column="2" data-line="4">2 - 4</td>
+                            <td data-column="3" data-line="4">3 - 4</td>
+                            <td data-column="4" data-line="4">4 - 4</td>
+                        </tr>
+                    </table>
+                </main>
+            </article>
+        </section>
+        <section class="row">
+            <article class="col-md-12">
+                <header>
+                    <h2>Grille de puissance 4</h2>
+                </header>
+                <main>
+                    
+                </main>
+            </article>
+        </section>
+    </main>
+    <footer class="bg-light text-center">
+        &copy; Dawan JAN - 2022
+    </footer>
+    <script>
+        console.log('fin du chargement de la page');
+    </script>
+</body>
+
+</html>

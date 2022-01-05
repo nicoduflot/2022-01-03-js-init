@@ -66,3 +66,7 @@ div#container p{
 .right{
     transform: translateX( calc(  100vw/2 - 100px )  );
 }
+
+#coord td[data-column][data-line], #selector td[data-column][data-line]{
+    text-align: center;
+}
