@@ -11,7 +11,6 @@
     <script src="../js/script.js"></script>
     <script>
         loaded(function(){
-
             let message = s('#message');
             s('a#retourAccueil').addEventListener('click', function(event){
                 console.log(event.target);
@@ -39,6 +38,22 @@
                 paragraphe.addEventListener('mouseover', function(){
                     affichage.innerHTML = this.innerHTML;
                 });
+            });
+
+            // image over
+            let imgOver = s('#imgOver');
+            imgOver.addEventListener('mouseover', function(){
+                imgOver.setAttribute('src', '../images/pip-boy-thumb-up.png');
+                imgOver.setAttribute('alt', 'Pouce en l\'air');
+                //imgOver.classList.add('bordure-rouge');
+                imgOver.classList.toggle('bordure-rouge');
+            });
+
+            imgOver.addEventListener('mouseout', function(){
+                imgOver.setAttribute('src', '../images/pip-boy-thumb-down.png');
+                imgOver.removeAttribute('alt');
+                //imgOver.classList.remove('bordure-rouge');
+                imgOver.classList.toggle('bordure-rouge');
             });
         });
     </script>
@@ -136,6 +151,7 @@
                     <p class="showP">
 
                     </p>
+                    <img src="../images/pip-boy-thumb-down.png" width="200" id="imgOver" />
                 </main>
             </article>
         </section>
